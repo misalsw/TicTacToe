@@ -17,6 +17,22 @@ public class TicTacToeGame {
         System.out.println("Player Letter is :" + playerLetter);
         System.out.println("Computer Letter is : " + computerSymbol);
         ticTacToeGame.showBoard();
+        ticTacToeGame.playerMakeMove(playerLetter);
+        ticTacToeGame.showBoard();
+    }
+
+    private void playerMakeMove(char playerLetter) {
+        System.out.println("Enter the position you want");
+        int boardPosition;
+        Scanner scanner = new Scanner(System.in);
+        boardPosition = scanner.nextInt();
+        if (boardPosition >= 1 && boardPosition <= 9) {
+            if(board[boardPosition] == ' ') {
+                board[boardPosition] = playerLetter;
+            } else {
+                System.out.println("Position is Already Occupied");
+            }
+        }
     }
 
     public void showBoard() {
@@ -50,4 +66,5 @@ public class TicTacToeGame {
         }
         return computerLetter;
     }
+
 }
