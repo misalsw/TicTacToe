@@ -17,22 +17,31 @@ public class TicTacToeGame {
         System.out.println("Player Letter is :" + playerLetter);
         System.out.println("Computer Letter is : " + computerSymbol);
         ticTacToeGame.showBoard();
-        ticTacToeGame.playerMakeMove(playerLetter);
+        ticTacToeGame.playerMakeMove(scanner, playerLetter);
+        ticTacToeGame.playerMakeMove(scanner, computerSymbol);
         ticTacToeGame.showBoard();
     }
 
-    private void playerMakeMove(char playerLetter) {
-        System.out.println("Enter the position you want");
+    private void playerMakeMove(Scanner input, char playerLetter) {
+        boolean isLocationFree;
         int boardPosition;
         Scanner scanner = new Scanner(System.in);
-        boardPosition = scanner.nextInt();
-        if (boardPosition >= 1 && boardPosition <= 9) {
-            if(board[boardPosition] == ' ') {
-                board[boardPosition] = playerLetter;
-            } else {
-                System.out.println("Position is Already Occupied");
+        do {
+            System.out.println("Enter the position you want");
+            boardPosition = scanner.nextInt();
+            isLocationFree = false;
+            if (boardPosition >= 1 && boardPosition <= 9) {
+                if (board[boardPosition] == ' ') {
+                    board[boardPosition] = playerLetter;
+                    showBoard();
+                } else {
+                    System.out.println("Position is Already Occupied");
+                }
             }
-        }
+        } while (!isLocationFree);
+        board[boardPosition] = playerLetter;
+        showBoard();
+
     }
 
     public void showBoard() {
