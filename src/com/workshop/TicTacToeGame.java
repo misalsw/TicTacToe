@@ -1,5 +1,6 @@
 package com.workshop;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class TicTacToeGame {
@@ -16,15 +17,27 @@ public class TicTacToeGame {
         char computerSymbol = ticTacToeGame.chooseSymbolForPlayer(playerLetter);
         System.out.println("Player Letter is :" + playerLetter);
         System.out.println("Computer Letter is : " + computerSymbol);
+        String first = ticTacToeGame.checkWhoStartsGame();
+        System.out.println(first + " will play First");
         ticTacToeGame.showBoard();
         ticTacToeGame.playerMakeMove(scanner, playerLetter);
         ticTacToeGame.playerMakeMove(scanner, computerSymbol);
         ticTacToeGame.showBoard();
     }
 
+    private String checkWhoStartsGame() {
+        int toss = (int) ((Math.random() * 10) % 2);
+        if(toss == 0) {
+            return "Player is First";
+        } else if(toss == 1)
+            return "Computer is First";
+        return null;
+    }
+
     private void playerMakeMove(Scanner input, char playerLetter) {
         boolean isLocationFree;
         int boardPosition;
+
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("Enter the position you want");
@@ -41,7 +54,6 @@ public class TicTacToeGame {
         } while (!isLocationFree);
         board[boardPosition] = playerLetter;
         showBoard();
-
     }
 
     public void showBoard() {
